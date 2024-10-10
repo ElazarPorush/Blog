@@ -20,15 +20,29 @@ const CommentSchema = new Schema<IComment>({
     required: [true, "please enter a content"]
   },
   author: {
-    type: Types.ObjectId ,
+    type: Schema.Types.ObjectId ,
     required: [true, "please enter an Object Id, otherwise you just wast your time here"]
   },
   createdAt: {
     type: Date,
-    required: [true, "you forgat to created a date!"]
+    required: [true, "you forgat to put a date!"]
   }
 });
 
-const PostSchema = new Schema<IPost>({})
+const PostSchema = new Schema<IPost>({
+  title: {
+    type: String,
+    required: [true, "please input a title"]
+  },
+  content: {
+    type: String,
+    required: [true, "please enter a content"]
+  },
+  author: {
+    type: Schema.Types.ObjectId ,
+    required: [true, "please enter an Object Id, otherwise you just wast your time here"]
+  },
+  comments: [CommentSchema]
+})
 
 export default mongoose.model<IPost>("Post", PostSchema);
